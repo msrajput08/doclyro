@@ -1,0 +1,36 @@
+# OPTIONAL local-first models. Not enabled by ordinary `docker compose up`.
+# Resources/model downloads may be substantial. Requires internet on first use.
+# Start: docker compose -f docker-compose.yml -f docker-compose.local-ai.yml up -d --build
+# Then pull the generative model:
+# docker compose -f docker-compose.yml -f docker-compose.local-ai.yml exec ollama ollama pull qwen2.5:3b-instruct
+# The images and runtime are independently maintained; pin audited digests for production.
+services:
+  pdfcraft:
+    environment:
+      AI_API_BASE_URL: http://ollama:11434/v1
+      AI_API_KEY: local-model # Ollama's OpenAI-compatible interface ignores this dummy value
+      AI_MODEL: qwen2.5:3b-instruct
+      LIBRETRANSLATE_URL: http://translation:5000/translate
+    depends_on:
+      - ollama
+      - translation
+  ollama:
+    image: ollama/ollama:latest
+    volumes:
+      - ollama_models:/root/.ollama
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+  translation:
+    image: libretranslate/libretranslate:latest
+    environment:
+      LT_LOAD_ONLY: en,es,fr,de,it,pt
+      LT_UPDATE_MODELS: "false"
+    volumes:
+      - translation_models:/home/libretranslate/.local
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+volumes:
+  ollama_models:
+  translation_models:

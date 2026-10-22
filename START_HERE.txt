@@ -1,0 +1,11 @@
+DOCLYRO — PROJECT START
+
+1. Extract this ZIP.
+2. Install/start Docker Desktop.
+3. Open a terminal in this folder.
+4. Run: docker compose up --build
+5. Visit: http://localhost:8000
+
+For free Render HTTPS hosting, connect a new GitHub repository containing this folder to Render and use render.yaml. The free service is guest-only, has ephemeral disk and memory/CPU limits.
+
+Status / testing: read README.md, RELEASE_STATUS.md and QA_REPORT.md.

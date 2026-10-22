@@ -1,0 +1,30 @@
+services:
+  pdfcraft:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      MAX_UPLOAD_MB: "50"
+      PDFCRAFT_DATA_DIR: /workspace/data
+      VAULT_TOTAL_MB: "300"
+      VAULT_FILE_MB: "50"
+      # Enable public HTTPS URL-to-PDF only when you trust the server deployment:
+      PDFCRAFT_ALLOW_REMOTE_URLS: "false"
+      # SMTP_HOST: "smtp.yourprovider.com"
+      # SMTP_PORT: "587"
+      # SMTP_FROM: "noreply@yourdomain.com"
+      # SMTP_USERNAME: "your-user"
+      # SMTP_PASSWORD: "your-app-password"
+      # PDFCRAFT_PUBLIC_URL: "https://yourdomain.com"
+      # Configure your separately managed translation or AI services if needed:
+      # LIBRETRANSLATE_URL: "https://your-trusted-translation-service/translate"
+      # LIBRETRANSLATE_API_KEY: ""
+    volumes:
+      - pdfcraft_data:/workspace/data
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp:size=1g
+volumes:
+  pdfcraft_data:

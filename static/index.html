@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<meta name="description" content="Doclyro — merge, split, compress, convert and edit PDF documents online using temporary processing.">
+<title>Doclyro — All the PDF tools you need</title>
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header class="site-header">
+  <div class="nav-inner">
+    <a class="brand" href="/" aria-label="Doclyro home">
+      <span class="brand-symbol" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M12 6h12l9 9v19H12z" fill="#e33147"/><path d="M24 6v10h9" fill="#ffabb4"/><path d="M8 12v22h18" fill="none" stroke="#e33147" stroke-width="3" stroke-linejoin="round"/></svg></span>
+      <span>Doc<span class="brand-accent">lyro</span></span>
+    </a>
+    <nav class="main-nav" aria-label="Navigation">
+      <a href="#tools" class="nav-link">All PDF tools</a>
+      <button class="nav-link nav-dropdown" id="convertButton" aria-expanded="false">Convert PDF <span>⌄</span></button>
+      <button class="nav-link nav-dropdown" id="organizeButton" aria-expanded="false">Organize PDF <span>⌄</span></button>
+    </nav>
+    <div class="nav-right"><a class="nav-min" href="#how-it-works">How it works</a><button type="button" class="workspace-open" id="openWorkspace">My workspace</button><span class="secure-pill"><span class="secure-dot"></span> No signup required</span><button class="mobile-menu" id="menuButton" aria-label="Open navigation">☰</button></div>
+  </div>
+  <div class="dropdown-menu" id="navDropdown" hidden></div>
+</header>
+<main>
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="eyebrow"><span class="eyebrow-spark">✦</span> YOUR EVERYDAY PDF TOOLKIT <span class="eyebrow-spark">✦</span></div>
+      <h1>Every tool you need to <span>work with PDFs</span> in one place</h1>
+      <p>Merge, split, compress, convert and edit your PDFs in just a few clicks. Simple tools, beautiful results, without the clutter.</p>
+      <div class="hero-chips"><span>✦ 42 document tools</span><span>⌁ Temporary processing</span><span>✓ No signup needed</span></div>
+    </div>
+    <div class="hero-decoration" aria-hidden="true"><span class="decor-one"></span><span class="decor-two"></span><span class="decor-three"></span></div>
+  </section>
+  <div id="hostingNotice" role="status" class="hosting-notice" hidden></div>
+  <section class="tools-section" id="tools">
+    <div class="section-top">
+      <div class="section-heading"><div class="section-kicker">EXPLORE TOOLS</div><h2>What would you like to do?</h2><p>Choose a tool and get started in seconds.</p></div>
+      <label class="search-wrap"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input id="searchInput" type="search" placeholder="Search PDF tools..." autocomplete="off"><kbd>/</kbd></label>
+    </div>
+    <div class="filters" id="filters" role="group" aria-label="Filter PDF tools"></div>
+    <div class="tool-grid" id="toolGrid"></div>
+    <div class="empty-state" id="emptyState" hidden>Nothing matched your search. Try a different tool name.</div>
+  </section>
+  <section class="reassurance" id="how-it-works"><div class="reassurance-head"><div class="section-kicker">BUILT FOR YOUR WORKFLOW</div><h2>Powerful PDF tools, zero friction</h2><p>Everything you need to finish your document tasks, all in one workspace.</p></div>
+    <div class="benefit-grid"><article class="benefit"><span class="benefit-icon">⚡</span><h3>Convert, then download</h3><p>Drop your files, set your preferences, and download your processed documents.</p></article><article class="benefit"><span class="benefit-icon">🔒</span><h3>Private by design</h3><p>Your files are handled in temporary workspaces and automatically removed after processing.</p></article><article class="benefit"><span class="benefit-icon">✦</span><h3>All your daily essentials</h3><p>Office conversions, OCR, page management, signatures, forms and more.</p></article></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="footer-inner"><a class="brand footer-brand" href="/"><span class="brand-symbol small">▤</span><span>Doc<span class="brand-accent">lyro</span></span></a><p>An independent document toolkit. Not affiliated with iLovePDF.</p><span>© 2026 Doclyro</span></div></footer>
+<div class="modal-backdrop" id="modalBackdrop" hidden>
+  <section class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="toolTitle">
+    <div class="modal-header"><div class="modal-head-left"><span class="modal-tool-icon" id="modalIcon"></span><div><div class="modal-subtitle">PDF TOOL</div><h2 id="toolTitle">Merge PDF</h2></div></div><button class="close-button" id="closeModal" aria-label="Close tool">×</button></div>
+    <div class="modal-content">
+      <div class="modal-stepper"><span class="step active"><b>1</b> Upload</span><i></i><span class="step"><b>2</b> Configure</span><i></i><span class="step"><b>3</b> Download</span></div>
+      <p class="modal-description" id="toolDescription"></p>
+      <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Choose files to upload"><div class="dropicon"><svg viewBox="0 0 60 60"><path d="M15 44a10 10 0 0 1-2-19 17 17 0 0 1 33-2 11 11 0 0 1-1 22H15z" fill="#fff1f2" stroke="#e03147" stroke-width="2.5"/><path d="M30 41V20m-8 8 8-8 8 8" fill="none" stroke="#e03147" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><strong>Drop your files here</strong><p>or click to browse from your device</p><span id="fileHint" class="hint-file">PDF files · up to 50 MB each</span><button type="button" class="secondary-upload" id="browseBtn">Choose files</button></div>
+      <input id="fileInput" type="file" hidden multiple>
+      <div id="cameraSection" class="camera-section" hidden>
+        <div class="adv-heading"><strong>Scan with camera</strong><span>Capture multiple document pages using your device camera. Browser camera permission and HTTPS are required.</span></div>
+        <video id="cameraPreview" autoplay playsinline muted hidden></video>
+        <div class="camera-buttons"><button id="startCamera" type="button">Start camera</button><button id="snapCamera" type="button" hidden>Capture page</button><button id="stopCamera" type="button" hidden>Stop camera</button><label class="camera-upload">Select photo<input id="cameraPhoto" type="file" accept="image/*" capture="environment" hidden></label></div>
+        <p id="cameraMessage" class="adv-status"></p>
+      </div>
+      <div class="file-section" id="fileSection" hidden><div class="files-heading"><h3>Selected files <span id="fileCount">0</span></h3><button id="addMore" class="mini-link">+ Add more</button></div><div class="file-list" id="fileList"></div></div>
+      <div class="file-preview" id="filePreview" hidden><img id="previewImage" alt="First PDF page preview"><div class="preview-information"><strong>Document preview</strong><p id="previewMeta">PDF</p><small>First page preview; output reflects your selected settings.</small></div></div>
+      <div class="advanced-editor" id="visualEditor" hidden></div>
+      <div class="advanced-editor" id="workflowBuilder" hidden></div>
+      <div class="advanced-editor" id="organizerBuilder" hidden></div>
+      <div class="advanced-editor" id="compareBuilder" hidden></div>
+      <div class="advanced-editor" id="signatureBuilder" hidden></div>
+      <div class="advanced-editor" id="watermarkBuilder" hidden></div>
+      <div class="options-panel" id="optionsPanel"><div class="options-heading"><h3>Tool options</h3><span>Customize your output</span></div><div id="optionsFields" class="options-fields"></div></div>
+      <div class="result-panel" id="resultPanel" hidden><div class="success-badge">✓</div><h3>Your file is ready!</h3><p id="resultFilename"></p><a class="result-download" href="#" id="downloadButton" download>↓ Download file</a><button type="button" class="vault-save" id="saveResult" hidden>Save PDF to my vault</button><button class="mini-link" id="startAgain">Process another file</button></div>
+      <div class="error-box" id="errorBox" hidden role="alert"></div>
+      <div class="modal-footer"><p><span class="dot-icon">●</span> Files automatically deleted after processing</p><button class="process-button" id="processButton"><span id="processLabel">Process PDF</span><span class="arrow">→</span></button></div>
+    </div>
+  </section>
+</div>
+<div id="workspaceOverlay" class="workspace-overlay" hidden>
+  <section class="workspace-dialog" role="dialog" aria-modal="true" aria-labelledby="workspaceTitle">
+    <div class="workspace-top"><div><small>PRIVATE DOCUMENT AREA</small><h2 id="workspaceTitle">My workspace</h2></div><button id="closeWorkspace" aria-label="Close workspace">×</button></div>
+    <div id="workspaceGuest">
+      <p>Create an account to store PDFs and send documents for consent-based remote electronic signatures. Regular tools still work without an account.</p>
+      <form id="authForm" class="vault-form">
+        <label>Email <input id="accountEmail" type="email" autocomplete="username" required></label>
+        <label>Password <input id="accountPassword" type="password" minlength="12" autocomplete="current-password" required></label>
+        <div class="workspace-actions"><button type="submit" id="loginSubmit">Sign in</button><button type="button" id="registerSubmit" class="outline-action">Create account</button></div>
+      </form>
+      <button type="button" class="mini-link" id="forgotPassword">Forgot password?</button>
+      <form id="resetPasswordForm" class="vault-form" hidden>
+        <label>New password <input type="password" id="resetNewPassword" minlength="12" autocomplete="new-password" required></label>
+        <button type="submit">Reset password</button>
+      </form>
+      <small>Self-hosted accounts require no third-party identity provider. Use a unique password of at least 12 characters.</small>
+    </div>
+    <div id="workspaceSigned" hidden>
+      <div class="workspace-account"><strong id="signedEmail"></strong><button id="logoutAccount">Sign out</button></div>
+      <p>Saved PDFs are stored on this server, separately for each account. Uploaded processing files remain temporary unless you choose to save them.</p>
+      <label class="vault-upload">+ Save PDF to vault<input type="file" id="vaultUpload" accept="application/pdf,.pdf" hidden></label>
+      <div id="vaultQuota" class="vault-note"></div>
+      <h3>My documents</h3><div id="vaultDocs" class="workspace-file-list"></div>
+      <h3>Connect cloud storage</h3>
+      <p>Optional personal Google Drive / Dropbox integration. This requires OAuth credentials configured by the server owner. Only connect accounts you control.</p>
+      <div id="cloudProviders" class="workspace-file-list"></div>
+      <div id="cloudRemoteFiles" class="workspace-file-list" hidden></div>
+      <h3>Request electronic signature</h3>
+      <form id="signatureRequestForm" class="vault-form">
+        <label>Choose saved PDF <select id="sigDocSelect" required></select></label>
+        <label>Signer name<input id="sigRecipientName" required maxlength="120" placeholder="Full name"></label>
+        <label>Signer email<input id="sigRecipientEmail" type="email" required placeholder="name@example.com"></label>
+        <button type="submit">Create signing link</button>
+      </form>
+      <div id="signingLink" hidden class="vault-link"><p>Send this private signing link to the intended signer. The link grants signing access; their identity is not independently verified.</p><input id="signingLinkValue" readonly><button id="copySigningLink">Copy link</button></div>
+      <h3>Signature requests</h3><div id="signRequestsList" class="workspace-file-list"></div>
+    </div>
+    <div role="alert" id="workspaceError" class="workspace-error" hidden></div>
+  </section>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="/app.js" defer></script>
+<script src="/advanced-ui.js" defer></script>
+<script src="/workspace-ui.js" defer></script>
+<script src="/camera.js" defer></script>
+<script src="/organizer-ui.js" defer></script>
+<script src="/compare-ui.js" defer></script>
+</body>
+</html>

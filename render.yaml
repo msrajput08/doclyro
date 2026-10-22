@@ -1,0 +1,27 @@
+# Doclyro — FREE GUEST-ONLY DEPLOYMENT, not a persistent production environment.
+# Render Free: 512 MB, 0.1 CPU, sleeps when idle, local files vanish on restart.
+services:
+  - type: web
+    name: doclyro
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    autoDeployTrigger: off
+    healthCheckPath: /api/health
+    envVars:
+      - key: PDFCRAFT_EPHEMERAL_MODE
+        value: "true"
+      - key: PDFCRAFT_CONCURRENT_JOBS
+        value: "1"
+      - key: PDFCRAFT_REQUESTS_PER_10_MIN
+        value: "12"
+      - key: MAX_UPLOAD_MB
+        value: "10"
+      - key: MAX_JOB_MB
+        value: "20"
+      - key: PDFCRAFT_ALLOW_REMOTE_URLS
+        value: "false"
+      - key: WEB_CONCURRENCY
+        value: "1"
+      - key: PYTHONUNBUFFERED
+        value: "1"
