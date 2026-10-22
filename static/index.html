@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#ffffff">
 <meta name="description" content="Doclyro — merge, split, compress, convert and edit PDF documents online using temporary processing.">
 <title>Doclyro — All the PDF tools you need</title>
-<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/style.css?v=20261022-pageview">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 </head>
 <body>
@@ -65,6 +65,7 @@
         <p id="cameraMessage" class="adv-status"></p>
       </div>
       <div class="file-section" id="fileSection" hidden><div class="files-heading"><h3>Selected files <span id="fileCount">0</span></h3><button id="addMore" class="mini-link">+ Add more</button></div><div class="file-list" id="fileList"></div></div>
+      <div id="pagePreview" class="page-preview" hidden></div>
       <div class="file-preview" id="filePreview" hidden><img id="previewImage" alt="First PDF page preview"><div class="preview-information"><strong>Document preview</strong><p id="previewMeta">PDF</p><small>First page preview; output reflects your selected settings.</small></div></div>
       <div class="advanced-editor" id="visualEditor" hidden></div>
       <div class="advanced-editor" id="workflowBuilder" hidden></div>
@@ -120,11 +121,12 @@
   </section>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="/app.js" defer></script>
+<script src="/app.js?v=20261022-pageview" defer></script>
 <script src="/advanced-ui.js" defer></script>
 <script src="/workspace-ui.js" defer></script>
 <script src="/camera.js" defer></script>
-<script src="/organizer-ui.js" defer></script>
+<script src="/organizer-ui.js?v=20261022-pageview" defer></script>
+<script src="/page-preview.js?v=20261022-pageview" defer></script>
 <script src="/compare-ui.js" defer></script>
 </body>
 </html>

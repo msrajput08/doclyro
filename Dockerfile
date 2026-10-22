@@ -10,6 +10,11 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 COPY app ./app
 COPY static ./static
+# Pin the matching PDF.js library + worker to the Docker image. Browser previews
+# stay on our own origin and do not depend on third-party CDN availability.
+RUN mkdir -p ./static/vendor && \
+    curl -fsSL --retry 3 --connect-timeout 15 https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js -o ./static/vendor/pdf.min.js && \
+    curl -fsSL --retry 3 --connect-timeout 15 https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js -o ./static/vendor/pdf.worker.min.js
 RUN useradd --system --uid 10001 --create-home --home-dir /home/pdfcraft pdfcraft \
     && mkdir -p /workspace/data && chown -R pdfcraft:pdfcraft /workspace/data
 USER pdfcraft

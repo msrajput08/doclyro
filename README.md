@@ -32,3 +32,13 @@ Summary works in local extractive mode without AI credentials. Translation requi
 - A full real Render deployment, public browser flow, independent security penetration audit, and cross-browser/performance testing are not completed or certified.
 
 See `FINAL_RELEASE_NOTES.md`, `SECURITY.md`, `RENDER_FREE.md`, `TECHNICAL_REFERENCE.md`, and `PARITY_MATRIX.md` for configuration and real constraints. The project is **not independently verified as 100% parity with iLovePDF**; source operation count is not a completeness percentage.
+
+
+### Visual page previews (October 2026)
+
+- Upload a PDF to see thumbnails for all pages in the browser. Thumbnails are lazy-rendered. Click a page to enlarge it and navigate left/right.
+- **Remove Pages**, **Extract Pages** and **Rotate PDF** now show page checkboxes. Selected pages sync with the Page range option and vice versa.
+- **Organize PDF** previews and manipulates page cards across multiple PDFs; thumbnails render client-side instead of one server call per page.
+- Docker builds vendor Mozilla PDF.js 3.11.174 (Apache-2.0) and matching worker to `/vendor/`. On non-Docker local hosts, a pinned CDN fallback is used.
+- Previewing a PDF renders it locally in the user's browser; processing still requires uploading the original document to the backend.
+- Password-protected PDFs require their password to preview and/or process. Some unsupported or damaged PDFs may fall back to the native PDF browser viewer.

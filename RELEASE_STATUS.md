@@ -7,3 +7,9 @@
 **Not verified:** Translation integration (requires configured service); a real Render Docker build and memory/load fit; real public-domain deployment; remote provider OAuth/SMTP; qualified certificate identity verification; formal PDF/A compliance; pixel-perfect conversion of arbitrary complex Office files; exhaustive browser E2E and production security certification.
 
 One ZIP intentionally replaces previous development version artifacts. This is an implementation handoff, **not** a claim of 100% commercial feature parity or a public go-live sign-off.
+
+
+### Visual page preview patch (2026-10-22)
+- Added lazy, browser-rendered multipage previews and visual page selection for Delete/Extract/Rotate.
+- Converted Organize PDF thumbnails to client-side rendering with server fallback.
+- Not yet asserted live until the GitHub commit and Render deployment are confirmed.
