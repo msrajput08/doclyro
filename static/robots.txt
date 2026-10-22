@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /sign.html
+Sitemap: https://doclyro.onrender.com/sitemap.xml
