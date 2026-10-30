@@ -120,13 +120,30 @@ def cli(args, timeout=180):
         raise ProcessingError((p.stderr or p.stdout or 'Conversion failed')[-600:])
 
 
-def libreoffice_convert(source, workdir: Path, extension='pdf'):
-    cmd=['libreoffice','-env:UserInstallation=file://'+str(workdir/'lo_profile'),
-         '--headless','--convert-to',extension,'--outdir',str(workdir),str(source)]
-    cli(cmd,120)
-    out=workdir/(source.stem+'.'+extension)
-    if not out.is_file() or out.stat().st_size==0:
-        raise ProcessingError('LibreOffice could not convert this file.')
+def libreoffice_convert(source, workdir: Path, extension='pdf', export_filter=None):
+    """Convert one Office document with an isolated LibreOffice profile and validate the result."""
+    if not source.is_file():
+        raise ProcessingError('The Office document could not be found.')
+    target = f'{extension}:{export_filter}' if export_filter else extension
+    profile = workdir/'lo_profile'
+    cmd = [
+        'libreoffice', '--headless', '--nologo', '--nodefault',
+        '--nolockcheck', '--norestore',
+        '-env:UserInstallation=file://'+str(profile),
+        '--convert-to', target, '--outdir', str(workdir), str(source)
+    ]
+    cli(cmd, 180)
+    out = workdir/(source.stem+'.'+extension)
+    if not out.is_file() or out.stat().st_size == 0:
+        raise ProcessingError('LibreOffice could not convert this Office document. Check that the file is valid and is not password-protected.')
+    if extension.lower() == 'pdf':
+        try:
+            with fitz.open(str(out)) as converted:
+                if not len(converted):
+                    raise ValueError('The generated PDF has no pages.')
+        except Exception as exc:
+            out.unlink(missing_ok=True)
+            raise ProcessingError('LibreOffice produced an invalid PDF. Try opening and re-saving the Office document before uploading it.') from exc
     return out
 
 
@@ -374,8 +391,20 @@ def op_ocr(files,opts,wd):
 
 
 def op_libreoffice(files,opts,wd):
-    if not files: raise ProcessingError('Select an Office file.')
-    return libreoffice_convert(files[0],wd,'pdf')
+    if len(files) != 1:
+        raise ProcessingError('Upload one Office document at a time.')
+    filters = {
+        '.doc': 'writer_pdf_Export', '.docx': 'writer_pdf_Export',
+        '.odt': 'writer_pdf_Export', '.rtf': 'writer_pdf_Export',
+        '.ppt': 'impress_pdf_Export', '.pptx': 'impress_pdf_Export',
+        '.odp': 'impress_pdf_Export',
+        '.xls': 'calc_pdf_Export', '.xlsx': 'calc_pdf_Export',
+        '.ods': 'calc_pdf_Export',
+    }
+    suffix = files[0].suffix.lower()
+    if suffix not in filters:
+        raise ProcessingError('Unsupported Office format. Upload a Word, PowerPoint or Excel document.')
+    return libreoffice_convert(files[0],wd,'pdf',filters[suffix])
 
 
 def fetch_public_html(url:str,workdir:Path):
@@ -469,22 +498,79 @@ def op_pdf_to_jpg(files,opts,wd):
 
 
 def op_pdf_to_word(files,opts,wd):
+    """Reconstruct editable Word layout; never silently replace a failed layout conversion with plain text."""
     onlypdf(files)
+    if len(files) != 1:
+        raise ProcessingError('Upload one PDF for Word conversion.')
+    password = str(option(opts,'password',''))
+    text_pages = 0
+    scanned_pages = 0
+    with pdfopen(files[0],opts) as doc:
+        if not len(doc):
+            raise ProcessingError('This PDF has no pages.')
+        for page in doc:
+            selectable = re.sub(r'\s+','',page.get_text('text'))
+            if len(selectable) >= 20:
+                text_pages += 1
+            elif page.get_images(full=True):
+                scanned_pages += 1
+
+    source = files[0]
+    converter_password = password or None
+    if scanned_pages and text_pages:
+        raise ProcessingError('This PDF mixes scanned pages and selectable-text pages. Run the OCR tool on the PDF first, then convert the OCR-enabled PDF to Word so scanned pages are not omitted.')
+    if scanned_pages and not text_pages:
+        try:
+            source = op_ocr(files,{
+                'password': password,
+                'language': str(option(opts,'language','eng')),
+                'dpi': intopt(opts,'dpi',220,150,300),
+            },wd)
+            converter_password = None
+        except ProcessingError:
+            raise
+        except Exception as exc:
+            raise ProcessingError('Automatic OCR could not prepare this scanned PDF. Check that the selected Tesseract language pack is installed, or run the OCR tool first.') from exc
+
     try:
         from pdf2docx import Converter
-        src=Converter(str(files[0])); output=wd/'converted.docx'
-        try: src.convert(str(output),start=0,end=None)
-        finally: src.close()
-        if output.exists() and output.stat().st_size>0:return output
-    except ImportError: pass
-    except Exception: pass
-    output=wd/'converted.docx';result=Document()
-    with pdfopen(files[0],opts) as d:
-        for i,p in enumerate(d):
-            if i: result.add_page_break()
-            for line in p.get_text('text',sort=True).splitlines():
-                if line.strip(): result.add_paragraph(line)
-    result.save(output);return output
+    except ImportError as exc:
+        raise ProcessingError('The PDF-to-Word layout engine is unavailable. Please contact the site administrator.') from exc
+
+    output = wd/'converted.docx'
+    try:
+        converter = Converter(str(source),password=converter_password)
+        try:
+            converter.convert(
+                str(output), start=0, end=None,
+                multi_processing=False,
+                ignore_page_error=False,
+                raw_exceptions=True,
+                parse_lattice_table=True,
+                parse_stream_table=True,
+                delete_end_line_hyphen=True,
+            )
+        finally:
+            converter.close()
+    except Exception as exc:
+        output.unlink(missing_ok=True)
+        detail = str(exc).strip()
+        detail = detail[:180] if detail else 'The layout parser could not reconstruct this document.'
+        raise ProcessingError(
+            'PDF-to-Word layout conversion failed: '+detail+
+            '. No simplified replacement was generated. For scanned or mixed PDFs, run OCR first and retry.'
+        ) from exc
+
+    if not output.is_file() or output.stat().st_size == 0:
+        raise ProcessingError('The PDF-to-Word engine did not generate a Word document.')
+    try:
+        with zipfile.ZipFile(output,'r') as package:
+            if package.testzip() is not None or 'word/document.xml' not in package.namelist():
+                raise ValueError('The DOCX package is incomplete.')
+    except (OSError,zipfile.BadZipFile,ValueError) as exc:
+        output.unlink(missing_ok=True)
+        raise ProcessingError('The converter did not produce a valid Word document. Please retry with a different PDF.') from exc
+    return output
 
 
 def op_pdf_to_powerpoint(files,opts,wd):

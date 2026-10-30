@@ -2,9 +2,10 @@ FROM python:3.11-slim
 ENV PYTHONUNBUFFERED=1 PIP_NO_CACHE_DIR=1
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates curl openssl ghostscript libreoffice-writer libreoffice-calc libreoffice-impress \
-    tesseract-ocr tesseract-ocr-eng tesseract-ocr-hin tesseract-ocr-fra tesseract-ocr-deu tesseract-ocr-spa fonts-dejavu-core \
+    tesseract-ocr tesseract-ocr-eng tesseract-ocr-hin tesseract-ocr-fra tesseract-ocr-deu tesseract-ocr-spa \
+    fontconfig fonts-dejavu-core fonts-liberation2 fonts-crosextra-carlito fonts-crosextra-caladea fonts-noto-core \
     libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf-2.0-0 libffi-dev shared-mime-info \
-    icc-profiles-free && rm -rf /var/lib/apt/lists/*
+    icc-profiles-free && fc-cache -f && rm -rf /var/lib/apt/lists/*
 WORKDIR /workspace
 COPY requirements.txt .
 RUN pip install -r requirements.txt
