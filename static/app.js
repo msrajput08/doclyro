@@ -90,8 +90,7 @@ const OPTS={
 'scan':[['margin','Margin in points','number','12'],['enhance','Improve scanned contrast','select:true|Auto enhance,false|Original','true'],['grayscale','Image color','select:false|Color,true|Black & white','false'],['perspective','Fix camera perspective','select:auto|Auto detect page,false|Do not crop photo','auto']],
 'pdf-to-jpg':[['mode','Image output','select:pages|Render each PDF page,images|Extract original embedded images','pages'],['dpi','Render resolution (DPI)','number','140']],
 'pdf-to-powerpoint':[['editable','PowerPoint text mode','select:true|Editable text (best effort),false|Pixel-faithful snapshot','true']],
-'word-to-pdf':'Uses LibreOffice with broader open-source font coverage. Fonts unavailable to the server may still be substituted.',
- 'pdf-to-word':[['password','PDF password (if needed)','password',''],['language','OCR language for scanned PDFs','select:eng|English,hin|Hindi,eng+hin|English + Hindi,fra|French,deu|German,spa|Spanish','eng','Used only when automatic OCR is needed; requires the matching Tesseract language pack.'],['dpi','OCR resolution (DPI)','number','220','Higher values can improve small text but take longer.']],
+'pdf-to-word':[['password','PDF password (if needed)','password',''],['language','OCR language for scanned PDFs','select:eng|English,hin|Hindi,eng+hin|English + Hindi,fra|French,deu|German,spa|Spanish','eng','Used only when automatic OCR is needed; requires the matching Tesseract language pack.'],['dpi','OCR resolution (DPI)','number','220','Higher values can improve small text but take longer.']],
 'pdf-to-pdfa':[['password','PDF password (if needed)','password','']],
 'rotate':[['angle','Rotation','select:90|90° right,180|180°,270|90° left,-90|-90°','90'],['pages','Pages to rotate (blank = all)','text','','Example: 1,3-5']],
 'page-numbers':[['position','Position','select:bottom|Bottom center,top|Top center','bottom'],['start','Starting number','number','1'],['font_size','Font size','number','12']],
@@ -118,6 +117,7 @@ const OPTS={
 'html-to-pdf':[['url','Public webpage HTTPS URL (optional)','text','','Requires server opt-in; remote stylesheets and images are blocked.'],['html','HTML source (if no file/URL)','textarea','','Paste HTML or upload an .html file. External resources are blocked.']],
 };
 const EXTRA_HINT={
+ 'word-to-pdf':'Uses LibreOffice with broader open-source font coverage. Fonts unavailable to the server may still be substituted.',
  'pdf-to-jpg':'Extract original embedded images without rerendering, or export each page as a JPG.','pdf-to-powerpoint':'Creates editable PowerPoint text boxes over a rasterized background (other artwork is not editable). Use Snapshot for pixel-faithful slides.',
  'pdf-to-word':'Uses layout-aware conversion and preserves editable text, images and tables where the PDF structure allows. Scanned-only PDFs are OCR-processed automatically. For mixed scanned and digital pages, run OCR first. Complex layouts may still need manual cleanup.',
  'pdf-to-excel':'Works best on PDFs that contain real tables. Scanned documents may need OCR first.',
