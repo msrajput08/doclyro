@@ -12,6 +12,7 @@ Notable changes to Doclyro are documented here. This file begins with the open-s
 
 ### Changed
 - Security documentation now consistently identifies the project as Doclyro.
+- Corrected stale operation counts and documented the PyMuPDF AGPL-3.0 licensing constraint; final project-wide license selection remains blocked pending maintainer decision.
 
 ### Notes
 - No application runtime, API, operation handler, database, or deployment configuration is changed by this foundation update.
