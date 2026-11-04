@@ -60,7 +60,7 @@ Doclyro is developed in the open. Contributions are welcome, subject to the owne
 
 ### License and third-party notices
 
-The repository currently contains an MIT license file, but **the project-wide license is not yet cleared**. PyMuPDF is distributed under AGPL-3.0 or a separate commercial license; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). The maintainer must choose a compliant licensing path before claiming the whole application is MIT-licensed or merging a final open-source license decision. The existing copyright line is retained pending a provenance review. Other third-party assets, fonts, sample documents, and downloaded runtime dependencies also require review.
+Doclyro is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0-only)**; see [LICENSE](LICENSE). The project adopts AGPL-3.0 to align with its PyMuPDF open-source dependency. AGPL section 13 requires a modified network-accessible version to offer its Corresponding Source to remote users. This repository is the source location; deployments must provide a clear, working source-access route. Third-party components remain under their own licenses; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). The maintainer has confirmed authority to relicense the project code. Sample assets and third-party materials remain subject to their own rights and notices.
 
 ### Project status
 
