@@ -1,6 +1,6 @@
-# Security and operational limits
+# Doclyro security policy and operational limits
 
-PDFCraft Studio is self-hosted reference code, not security-certified infrastructure for unknown public traffic. Do not publish anonymously without a security review.
+Doclyro is self-hosted reference code, not security-certified infrastructure for unknown public traffic. Do not publish anonymously without a security review.
 
 - **Authentication:** scrypt password hashing with per-user salts; SHA-256-hashed random bearer session tokens expiring after 24 hours. Bearer tokens live in browser session storage. Password reset uses SMTP-delivered one-use links (30-minute expiry), hashes reset tokens at rest and revokes existing sessions; reset is unavailable until server SMTP configuration. No MFA or email verification is provided.
 - **Authorization:** file metadata is scoped by owner ID; stored filenames are sanitized; ownership is checked on read/delete and signing request retrieval. Accounts and uploads cannot access other users' files in current route tests.
@@ -15,6 +15,10 @@ PDFCraft Studio is self-hosted reference code, not security-certified infrastruc
 - **Operations:** enforce HTTPS with a reverse proxy, content security policy, file/malware scanning, process/container quotas, isolated workers, antivirus and penetration tests. Run as an unprivileged user with limited filesystem access. Implement proper logging that excludes document text and authorization headers. Set retention/deletion/backup controls and comply with relevant privacy requirements.
 
 **Never commit `data/`, `.env`, OAuth tokens, session tokens, private certificates, or user documents to a repository.**
+
+## Reporting a vulnerability
+
+Please do not disclose exploitable vulnerabilities in public issues. If GitHub private vulnerability reporting is enabled for this repository, use the repository's **Security → Advisories → Report a vulnerability** flow. If that option is unavailable, contact the maintainer privately through the GitHub profile before sharing technical details. Do not include real user documents, credentials, access tokens, or private keys in a report.
 
 ## v5 signing and comparison additions
 
