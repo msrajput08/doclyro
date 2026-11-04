@@ -6,6 +6,13 @@ Doclyro combines Python packages, operating-system packages, fonts, and browser-
 
 - **PDF.js 3.11.174** — the Docker build downloads `pdf.min.js` and `pdf.worker.min.js` from cdnjs at image-build time. Mozilla PDF.js is distributed under Apache License 2.0. Preserve its license and required notices when distributing images or vendored copies. Verify the exact upstream release and include the corresponding license/notice in redistributed bundles.
 
+
+## Important copyleft dependency: PyMuPDF
+
+- **PyMuPDF** — the package metadata and Artifex licensing documentation identify the open-source route as GNU AGPL v3, with a separate commercial license option. This is a material licensing constraint: combining and distributing or operating the current application with the AGPL build may trigger AGPL obligations for the combined application, including source availability to network users under the AGPL's terms. The repository's existing MIT license does not override PyMuPDF's license.
+- The project must choose one of these paths before claiming a clear, consistent project-wide license: (1) adopt AGPL-3.0 for the combined project after confirming all contributors' rights and preserving existing notices; (2) obtain an appropriate Artifex commercial license; or (3) replace PyMuPDF with a suitably licensed alternative and validate that all current PDF workflows remain equivalent.
+- Do not merge or publish a blanket MIT licensing claim until this decision is resolved. See the official [PyMuPDF licensing page](https://pymupdf.io/licensing) and [PyMuPDF documentation](https://pymupdf.readthedocs.io/en/latest/about.html).
+
 ## Python runtime dependencies
 
 The current `requirements.txt` declares FastAPI, Uvicorn, python-multipart, PyMuPDF, Pillow, python-docx, python-pptx, openpyxl, ReportLab, pdfplumber, WeasyPrint, pytesseract, httpx, pdf2docx, cryptography, pypdf, and opencv-python-headless. Transitive packages are also installed.
