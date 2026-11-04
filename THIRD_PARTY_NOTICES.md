@@ -1,6 +1,6 @@
 # Third-party software and license inventory
 
-Doclyro combines Python packages, operating-system packages, fonts, and browser-side libraries. This inventory is an audit starting point, not a claim that all dependencies share Doclyro's MIT license. Each component remains under its own license and notice requirements.
+Doclyro is licensed under GNU AGPL-3.0-only. It combines Python packages, operating-system packages, fonts, and browser-side libraries; each third-party component remains under its own license and notice requirements.
 
 ## Browser-side PDF rendering
 
@@ -10,8 +10,8 @@ Doclyro combines Python packages, operating-system packages, fonts, and browser-
 ## Important copyleft dependency: PyMuPDF
 
 - **PyMuPDF** — the package metadata and Artifex licensing documentation identify the open-source route as GNU AGPL v3, with a separate commercial license option. This is a material licensing constraint: combining and distributing or operating the current application with the AGPL build may trigger AGPL obligations for the combined application, including source availability to network users under the AGPL's terms. The repository's existing MIT license does not override PyMuPDF's license.
-- The project must choose one of these paths before claiming a clear, consistent project-wide license: (1) adopt AGPL-3.0 for the combined project after confirming all contributors' rights and preserving existing notices; (2) obtain an appropriate Artifex commercial license; or (3) replace PyMuPDF with a suitably licensed alternative and validate that all current PDF workflows remain equivalent.
-- Do not merge or publish a blanket MIT licensing claim until this decision is resolved. See the official [PyMuPDF licensing page](https://pymupdf.io/licensing) and [PyMuPDF documentation](https://pymupdf.readthedocs.io/en/latest/about.html).
+- The project has selected AGPL-3.0-only for the combined application and the maintainer has confirmed authority to relicense project code. PyMuPDF's separate commercial license remains an alternative for deployments that need different terms.
+- AGPL-3.0 section 13 requires modified network-accessible versions to offer their Corresponding Source to remote users. Any hosted Doclyro deployment must provide this source offer in a prominent, convenient way and keep the source available under the licence terms. See the official [PyMuPDF licensing page](https://pymupdf.io/licensing) and [PyMuPDF documentation](https://pymupdf.readthedocs.io/en/latest/about.html).
 
 ## Python runtime dependencies
 
@@ -31,8 +31,8 @@ The Docker image installs LibreOffice components, Ghostscript, Tesseract and lan
 
 ## Maintainer checklist
 
-- [ ] Confirm every source file is authored by the project owner or contributed under compatible terms.
-- [ ] Confirm the existing MIT copyright holder wording accurately reflects all rights holders.
+- [x] Maintainer confirmed authority to relicense project code under AGPL-3.0-only.
+- [ ] Continue reviewing bundled samples, fonts, logos, and other third-party assets for independent redistribution rights.
 - [ ] Review every direct and transitive Python dependency license for selected versions.
 - [ ] Preserve third-party license files and notices in source distributions and container images.
 - [ ] Verify fonts, Tesseract language data, ICC profiles, and native package notices.
