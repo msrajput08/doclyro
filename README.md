@@ -42,3 +42,24 @@ See `FINAL_RELEASE_NOTES.md`, `SECURITY.md`, `RENDER_FREE.md`, `TECHNICAL_REFERE
 - Docker builds vendor Mozilla PDF.js 3.11.174 (Apache-2.0) and matching worker to `/vendor/`. On non-Docker local hosts, a pinned CDN fallback is used.
 - Previewing a PDF renders it locally in the user's browser; processing still requires uploading the original document to the backend.
 - Password-protected PDFs require their password to preview and/or process. Some unsupported or damaged PDFs may fall back to the native PDF browser viewer.
+
+
+---
+
+## Open-source project
+
+Doclyro is developed in the open. Contributions are welcome, subject to the ownership, third-party licensing, and security review notes below.
+
+- Read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing code changes.
+- Community participation follows the [Code of Conduct](CODE_OF_CONDUCT.md).
+- Report reproducible bugs and propose features using the GitHub issue templates.
+- Review [SECURITY.md](SECURITY.md) before reporting security concerns.
+- Current automated checks are defined in [GitHub Actions CI](.github/workflows/ci.yml).
+
+### License and third-party notices
+
+The repository currently contains an MIT license file. Before treating every file and bundled asset as cleared for redistribution or accepting broad external contributions, the project maintainer must verify authorship/permission for all contributed code and review the licenses and notices for third-party assets, fonts, sample documents, and downloaded runtime dependencies. The existing copyright line is retained pending that provenance review; this README does not assert that every bundled component is MIT-licensed.
+
+### Project status
+
+This repository is actively evolving. Historical documents contain differing operation counts; the live `/api/tools` response is the source of truth for the current backend operation registry. The project does not claim complete commercial feature parity, production security certification, formal PDF/A conformance, or qualified electronic-signature status.
