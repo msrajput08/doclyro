@@ -1,0 +1,48 @@
+name: Bug report
+description: Report a reproducible problem in Doclyro.
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: "Please do not upload real personal documents, credentials, tokens, or private certificates. Use synthetic or safely redacted samples."
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the unexpected behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. Open ... 2. Select ... 3. Run ..."
+    validations:
+      required: true
+  - type: input
+    id: operation
+    attributes:
+      label: Tool / operation
+      description: Include the operation name or API slug, if known.
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: OS, browser, Docker/local, Python version
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant error output
+      description: Remove personal data, file contents, tokens, and secrets.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Confirmation
+      options:
+        - label: I have searched existing issues.
+          required: true
+        - label: I have removed sensitive information and used a non-sensitive test file.
+          required: true

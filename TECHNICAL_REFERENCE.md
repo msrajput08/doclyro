@@ -1,16 +1,16 @@
 # Doclyro v6 — development build (not production release)
 
-This source is the continued work on the PDFCraft Studio project, renamed **Doclyro**. The original v5 engine is retained; v6 introduces 2 additional tools (38 operation slugs total), Render Free preview configuration and safer handling of ephemeral file storage. See `RELEASE_STATUS.md` and `RENDER_FREE.md` first.
+Doclyro is the renamed continuation of the earlier PDFCraft Studio codebase. The current backend registry contains **42 operation slugs** (including aliases that may share an implementation); use `GET /api/tools` as the runtime source of truth. The v6 work adds metadata removal, grayscale, Render Free guest-preview configuration and safer handling of ephemeral file storage. See `RELEASE_STATUS.md` and `RENDER_FREE.md` first.
 
 **Current state:** Not yet 100% feature complete or fully tested. Do not advertise full commercial iLovePDF parity, guarantee legal signature identity, or assume every large Office/OCR conversion runs on free hosting.
 
 **Never use Render Free to store permanent user accounts, document vault contents or remote signature requests.** The included `render.yaml` enforces `PDFCRAFT_EPHEMERAL_MODE=true` for preview mode and hides those features; full self-hosted features exist in source for environments with genuinely durable storage.
 
-Detailed v5 implementation documentation follows.
+The following section preserves historical v5 implementation notes for context; current project branding is Doclyro.
 
 ---
 
-# PDFCraft Studio v5 — self-hosted PDF toolkit
+# Historical v5 baseline — self-hosted PDF toolkit
 
 **Current status: Expanded working source project. NOT 100% iLovePDF commercial/service-level parity.**
 

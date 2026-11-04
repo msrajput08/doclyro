@@ -9,11 +9,11 @@ All v5 limitations below still apply.
 | Render Free hosting | Guest-only preview profile with 10 MB/file, 20 MB/job, limited concurrent processing; not permanent storage or high-volume production. |
 | Security/operational work | Free-host vault/cloud/signing endpoints disabled; concurrency and basic per-client request limits; resource constraints remain significant. |
 
-**38 tool slugs is not 100% parity with any commercial platform.**
+**The current backend registry contains 42 operation slugs, including aliases. This count is not a measure of parity with any commercial platform.**
 
 ---
 
-# PDFCraft Studio v5 baseline — feature/parity matrix (20 October 2026)
+# Historical v5 baseline — feature/parity matrix (20 October 2026)
 
 | Feature family | Implemented source behavior | Full commercial parity? |
 |---|---|---|

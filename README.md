@@ -31,7 +31,7 @@ Summary works in local extractive mode without AI credentials. Translation requi
 - Python HTTP integration tests covered conversion and downloadable results.
 - A full real Render deployment, public browser flow, independent security penetration audit, and cross-browser/performance testing are not completed or certified.
 
-See `FINAL_RELEASE_NOTES.md`, `SECURITY.md`, `RENDER_FREE.md`, `TECHNICAL_REFERENCE.md`, and `PARITY_MATRIX.md` for configuration and real constraints. The project is **not independently verified as 100% parity with iLovePDF**; source operation count is not a completeness percentage.
+See `FINAL_RELEASE_NOTES.md`, `SECURITY.md`, `RENDER_FREE.md`, `TECHNICAL_REFERENCE.md`, `PARITY_MATRIX.md`, and `ARCHITECTURE.md` for configuration and real constraints. The project is **not independently verified as 100% parity with iLovePDF**; source operation count is not a completeness percentage.
 
 
 ### Visual page previews (October 2026)
@@ -42,3 +42,26 @@ See `FINAL_RELEASE_NOTES.md`, `SECURITY.md`, `RENDER_FREE.md`, `TECHNICAL_REFERE
 - Docker builds vendor Mozilla PDF.js 3.11.174 (Apache-2.0) and matching worker to `/vendor/`. On non-Docker local hosts, a pinned CDN fallback is used.
 - Previewing a PDF renders it locally in the user's browser; processing still requires uploading the original document to the backend.
 - Password-protected PDFs require their password to preview and/or process. Some unsupported or damaged PDFs may fall back to the native PDF browser viewer.
+
+
+---
+
+## Open-source project
+
+Doclyro is developed in the open. Contributions are welcome, subject to the ownership, third-party licensing, and security review notes below.
+
+- Read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing code changes.
+- See [ARCHITECTURE.md](ARCHITECTURE.md) for the application structure and data flows.
+- Review [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) before redistributing or packaging the project.
+- Community participation follows the [Code of Conduct](CODE_OF_CONDUCT.md).
+- Report reproducible bugs and propose features using the GitHub issue templates.
+- Review [SECURITY.md](SECURITY.md) before reporting security concerns.
+- Current automated checks are defined in [GitHub Actions CI](.github/workflows/ci.yml).
+
+### License and third-party notices
+
+Doclyro is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0-only)**; see [LICENSE](LICENSE). The project adopts AGPL-3.0 to align with its PyMuPDF open-source dependency. AGPL section 13 requires a modified network-accessible version to offer its Corresponding Source to remote users. This repository is the source location; deployments must provide a clear, working source-access route. Third-party components remain under their own licenses; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). The maintainer has confirmed authority to relicense the project code. Sample assets and third-party materials remain subject to their own rights and notices.
+
+### Project status
+
+This repository is actively evolving. Historical documents contain differing operation counts; the live `/api/tools` response is the source of truth for the current backend operation registry. The project does not claim complete commercial feature parity, production security certification, formal PDF/A conformance, or qualified electronic-signature status.
