@@ -457,13 +457,17 @@ def op_html_to_pdf(files,opts,wd):
         html=files[0].read_text('utf-8',errors='replace')
     if not html: raise ProcessingError('Paste HTML content, provide a permitted webpage URL, or upload an HTML file.')
     # WeasyPrint blocks remote URL/resource fetches for safety on untrusted inputs.
-    from weasyprint import HTML, CSS
-    from weasyprint.urls import default_url_fetcher
-    def safe_fetch(url,*args,**kwargs):
-        if not url.startswith('data:'): raise ProcessingError('Remote HTML resources are disabled for security.')
-        return default_url_fetcher(url,*args,**kwargs)
+    from weasyprint import HTML
+    from weasyprint.urls import URLFetcher
+    class SafeDataURLFetcher(URLFetcher):
+        def fetch(self,url,headers=None):
+            # HTML-to-PDF accepts inline data resources only. Do not allow file,
+            # HTTP, HTTPS, or other schemes to bypass the server-side URL policy.
+            if not url.startswith('data:'):
+                raise ProcessingError('Remote HTML resources are disabled for security.')
+            return super().fetch(url,headers)
     output=wd/'webpage.pdf'
-    HTML(string=html,url_fetcher=safe_fetch).write_pdf(str(output))
+    HTML(string=html,url_fetcher=SafeDataURLFetcher()).write_pdf(str(output))
     return output
 
 
