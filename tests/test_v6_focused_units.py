@@ -82,7 +82,9 @@ assert '/api/capabilities' in paths
 
 
 def test_persistent_mode_keeps_account_routes_in_self_hosted_build():
-    script='''from app.main import app, capabilities
+    script='''import os
+os.environ['PDFCRAFT_EPHEMERAL_MODE']='false'
+from app.main import app, capabilities
 paths={getattr(r,'path','') for r in app.routes}
 assert capabilities()['persistent_accounts']
 assert '/api/auth/register' in paths, sorted(paths)
