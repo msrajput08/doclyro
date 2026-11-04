@@ -31,7 +31,7 @@ Summary works in local extractive mode without AI credentials. Translation requi
 - Python HTTP integration tests covered conversion and downloadable results.
 - A full real Render deployment, public browser flow, independent security penetration audit, and cross-browser/performance testing are not completed or certified.
 
-See `FINAL_RELEASE_NOTES.md`, `SECURITY.md`, `RENDER_FREE.md`, `TECHNICAL_REFERENCE.md`, and `PARITY_MATRIX.md` for configuration and real constraints. The project is **not independently verified as 100% parity with iLovePDF**; source operation count is not a completeness percentage.
+See `FINAL_RELEASE_NOTES.md`, `SECURITY.md`, `RENDER_FREE.md`, `TECHNICAL_REFERENCE.md`, `PARITY_MATRIX.md`, and `ARCHITECTURE.md` for configuration and real constraints. The project is **not independently verified as 100% parity with iLovePDF**; source operation count is not a completeness percentage.
 
 
 ### Visual page previews (October 2026)
@@ -51,6 +51,8 @@ See `FINAL_RELEASE_NOTES.md`, `SECURITY.md`, `RENDER_FREE.md`, `TECHNICAL_REFERE
 Doclyro is developed in the open. Contributions are welcome, subject to the ownership, third-party licensing, and security review notes below.
 
 - Read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing code changes.
+- See [ARCHITECTURE.md](ARCHITECTURE.md) for the application structure and data flows.
+- Review [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) before redistributing or packaging the project.
 - Community participation follows the [Code of Conduct](CODE_OF_CONDUCT.md).
 - Report reproducible bugs and propose features using the GitHub issue templates.
 - Review [SECURITY.md](SECURITY.md) before reporting security concerns.
@@ -58,7 +60,7 @@ Doclyro is developed in the open. Contributions are welcome, subject to the owne
 
 ### License and third-party notices
 
-The repository currently contains an MIT license file. Before treating every file and bundled asset as cleared for redistribution or accepting broad external contributions, the project maintainer must verify authorship/permission for all contributed code and review the licenses and notices for third-party assets, fonts, sample documents, and downloaded runtime dependencies. The existing copyright line is retained pending that provenance review; this README does not assert that every bundled component is MIT-licensed.
+The repository currently contains an MIT license file. Its existing copyright line is retained pending a maintainer provenance review. Before treating every file and bundled asset as cleared for redistribution or accepting broad external contributions, verify authorship/permission for all contributed code and review the licenses and notices for third-party assets, fonts, sample documents, and downloaded runtime dependencies. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). This README does not assert that every bundled component is MIT-licensed.
 
 ### Project status
 
